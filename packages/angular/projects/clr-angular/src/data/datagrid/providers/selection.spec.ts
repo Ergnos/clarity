@@ -184,14 +184,19 @@ export default function (): void {
         let nbChanges = 0;
         let currentSelection: number[];
         selectionInstance.change.subscribe((items: any) => {
+          console.log(items);
           nbChanges++;
           currentSelection = items;
         });
         selectionInstance.setSelected(4, true);
         expect(currentSelection).toEqual([4]);
+        console.log('pre-toggle-all');
         selectionInstance.toggleAll();
+        console.log('after-toggle-all');
         expect(currentSelection.sort(numberSort)).toEqual(itemsInstance.displayed);
+        console.log('pre-toggle-all deselect');
         selectionInstance.toggleAll();
+        console.log('after toggle-all deselect');
         expect(currentSelection).toEqual([]);
         expect(nbChanges).toBe(3);
       });
